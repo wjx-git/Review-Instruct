@@ -29,7 +29,7 @@ def review_instruct(promptor, model_chairman, model_candidate, model_reviewers, 
     chairman = Chairman(promptor, model_chairman, question)
     candidate = Candidate(promptor, model_candidate)
     reviewers = [Reviewer(promptor, model, question) for model in model_reviewers]
-    max_tokens = 4096  # max output tokens
+    max_tokens = 8192  # max output tokens
     for _ in range(rounds):
         try:
             ############ Response ############
@@ -76,13 +76,10 @@ def run(promptor, model_chairman, model_candidate, model_reviewers, questions, r
     Output:
         dataset: [dict] list of data
     '''
-    dataset = []
 
     for i, question in enumerate(questions):
-        data = review_instruct(promptor, model_chairman, model_candidate, model_reviewers, question, rounds, save_file)
-        dataset.append(data)
+        review_instruct(promptor, model_chairman, model_candidate, model_reviewers, question, rounds, save_file)
         print(f'Question id: {str(i+1)} completed.')
-    return dataset
 
 
 if __name__ == "__main__":
