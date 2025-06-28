@@ -34,35 +34,26 @@ missing_actions_prompts = 'Only generate //ACTIONS_UNDONE//! ENCLOSE THEM IN TAG
 class Prompter:
     def __init__(self, lang='en'):
         self.lang = lang
-        if self.lang == 'en':
-            self.chairman_instruction = chairman_instruction
-            self.candidate_instruction = candidate_instruction
-            self.reviewer_instruction = reviewer_instruction
-            self.init_user_input = init_user_input
-            self.missing_actions_prompts = missing_actions_prompts
-            
-            self.actions = actions
-            self.action_prompts = action_prompts
-            
-            self.word2token = 4/3
-            self.word_limit_normal = 300
-            self.word_limit_extra_space = 400 #for need_extra_space_cats
-            self.judge_word_limit = 300 #for judge verdicts
-        else:
-            raise ValueError("Invalid language: " + lang)
+        self.chairman_instruction = chairman_instruction
+        self.candidate_instruction = candidate_instruction
+        self.reviewer_instruction = reviewer_instruction
+        self.init_user_input = init_user_input
+        self.missing_actions_prompts = missing_actions_prompts
+        
+        self.actions = actions
+        self.action_prompts = action_prompts
+        
+        self.word2token = 4/3
+        self.word_limit_normal = 300
+        self.word_limit_extra_space = 400 #for need_extra_space_cats
+        self.judge_word_limit = 300 #for judge verdicts
     
     def get_qgen_prompt(self, domain, num):
         prompt = self.question_generation_instruction.replace('//NUM//', str(num)).replace('//DOMAIN//', domain).replace('//QGEN_COMMAND_DOMAIN//', self.qgen_command_dict[domain]).replace('//QGEN_EXAMPLE_DOMAIN//', self.qgen_example_dict[domain])
         return prompt
     
     def cats_in_language(self, cats):
-        if self.lang == 'en':
-            return cats
-        else:
-            return [self.domain_en_to_lang[cat] for cat in cats]
+        return cats
         
     def acts_in_language(self, acts):
-        if self.lang == 'en':
-            return acts
-        else:
-            return [self.action_en_to_lang[act] for act in acts]
+        return acts

@@ -6,7 +6,7 @@ import time
 import os
 
 # example, please put all model names into the list here
-supported_models = ['gpt-4-turbo-preview']
+# supported_models = ['gpt-4-turbo-preview']
 
 API_MAX_RETRY = 5
 API_RETRY_SLEEP = 30
@@ -29,35 +29,25 @@ def chat_completion_openai(model, conv, temperature, max_tokens=2048, n=1):
         try:
             response = openai_client.chat.completions.create(model=model,
                 messages=conv,
-                n=n,
+                n=1,
                 temperature=temperature,
                 max_tokens=max_tokens)
-            if n == 1:
-                output = response.choices[0].message.content
-            else:
-                output = [response.choices[i].message.content for i in range(n)]
+            output = response.choices[0].message.content
             break
         except openai.OpenAIError as e:
             print(f'{model} encountered error')
             print(type(e), e)
-            if retry_i == API_MAX_RETRY - 1:
-                raise e
-            else:
-                time.sleep(API_RETRY_SLEEP)
     return output
 
 
 
 # map to api_utils
 # please put all api calling functions here
-def generate_response(model, conv, temperature = 0.1, max_tokens = 400, n = 1, model_name = None):
+def generate_response(model, conv, temperature = 0.1, max_tokens = 8192, n = 1, model_name = None):
     if model_name is None:
         name = model.model_name
     else:
         name = model_name
 
-    if name in supported_models:
-        output = chat_completion_openai(name, conv, temperature = temperature, max_tokens = max_tokens, n = n)
-        return output
-    else:
-        raise ValueError(f"Unsupported model: {model}")
+    output = chat_completion_openai(name, conv, temperature = temperature, max_tokens = max_tokens, n = n)
+    return output

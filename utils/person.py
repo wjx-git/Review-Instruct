@@ -132,9 +132,7 @@ class Person:
 class Chairman(Person):
     def __init__(self, promptor, model_name):
         super().__init__(promptor, model_name)
-        self.chat_history = [{"role": "system", "content":self.promptor.chairman_instruction},
-                            # {"role": "user", "content": 'Dear Examiners, I am ready to answer the questions. Please proceed.'},
-                            ]
+        self.chat_history = [{"role": "system", "content":self.promptor.chairman_instruction}]
         self.actions = self.promptor.acts_in_language(['<respond>'])
 
    
