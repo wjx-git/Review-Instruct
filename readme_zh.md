@@ -81,7 +81,7 @@ Llama3的技术报告中披露llama3在后训练阶段使用的SFT数据均为�
 - 相比单Reviewer方法：**新标签比例↑7.5%**  
 
 <p align="center">
-  <img src="assets/fig4.png" alt="Instruction Diversity scores" />
+  <img src="assets/fig4.png" alt="Instruction Diversity scores" width=500/>
 </p>
 
 ## 六、总结
