@@ -26,7 +26,7 @@ here is an example command:
 ```bash
 python main.py
 ```
-# 引用
+## cite
 ```{bibliography}
 @inproceedings{wu-etal-2025-review,
     title = "Review-Instruct: A Review-Driven Multi-Turn Conversations Generation Method for Large Language Models",
