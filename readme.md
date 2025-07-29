@@ -41,10 +41,6 @@ python main.py
       Mingpeng, Mingpeng  and
       Shi, Kai  and
       Li, Zixian",
-    editor = "Che, Wanxiang  and
-      Nabende, Joyce  and
-      Shutova, Ekaterina  and
-      Pilehvar, Mohammad Taher",
     booktitle = "Findings of the Association for Computational Linguistics: ACL 2025",
     month = jul,
     year = "2025",
